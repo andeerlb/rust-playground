@@ -17,10 +17,16 @@ fn main() {
     let secret_number = rand::random_range(1..=10);
 
     loop {
-        let guess: i32 = ask_for_input!("Please enter your guess:")
+        let guess: i32 = match ask_for_input!("Please enter your guess:")
             .trim() // remove \n
-            .parse() // converte para i32
-            .expect("Please type a valid number!");
+            .parse() // convert to i32
+            {
+            Ok(num) => num,
+            Err(_) => {
+                println!("Invalid input. Please enter a number between 1 and 10.");
+                continue;       
+            }
+        };
 
         println!("You guessed: {guess}");
 
