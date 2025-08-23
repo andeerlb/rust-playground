@@ -1,4 +1,4 @@
-// One bit is reserved to indicate whether the number is positive or negative.
+// One bit is reserved to indicate whether the number is positive or negative. (sign bit)
 // The number is positive because the first bit is 0
 // 00000000 00000000 00000000 00000001
 // ˆ signal bit = 0, it means that the value is positive
@@ -7,6 +7,19 @@
 // 11111111 11111111 11111111 11111110
 // ˆ signal bit = 1, it means that the value is negative
 
+
+// rust use two's complements to calcule bit
+// Two’s complement is the standard way to represent signed integers (positive and negative numbers) in binary.
+
+// 11111111 11111111 11111111 11111101  (-2 before adding 1 in two’s complement process)
+// +                                      1
+// --------------------------------------
+// 11111111 11111111 11111111 11111110
+
+//   11111101  (this is 253 in unsigned, but treat as bits)
+// + 00000001
+//   ----------
+//   11111110
 fn main() {
     let num1: i32 = 5;   // binary: 0101
     let num2: i32 = 9;   // binary: 1001
@@ -38,10 +51,31 @@ fn main() {
     println!("The result of bitwise AND is: {}", result);
     println!("The result of bitwise NOT is: {}", !result); // \!result like a bit is = 11111111 11111111 11111111 11111110 (will invert each bit, if earlier 1 becomes 0 and vice versa)
     println!("The result of bitwise OR is: {}", num1 | num2);
-    println!("The result of bitwise XOR is: {}", num1 ^ num2);
-    println!("The result of bitwise left shift is: {}", num1 << 1);
-    println!("The result of bitwise right shift is: {}", num1 >> 1);
+    // The bitwise OR (|) operator compares each bit of the two numbers:
+    // If either bit is 1, the result is 1.
+    // 0|1|0|1
+    // 1|0|0|1
+    // -------
+    // 1|1|0|1
 
+    println!("The result of bitwise XOR is: {}", num1 ^ num2);
+    // XOR is 1 only if the bits are different.
+    // 0|1|0|1
+    // 1|0|0|1
+    // -------
+    // 1|1|0|0
+
+    println!("The result of bitwise left shift is: {}", num1 << 1);
+    // The left shift operator (<<) moves all bits to the left by the specified number of positions.
+    // This effectively multiplies the number by 2 for each shift position.
+    // Syntax: value << n → shift left by n bits
+    // Example: 5 << 1 → 10 (binary: 0101 << 1 = 1010)
+
+    println!("The result of bitwise right shift is: {}", num1 >> 1);
+    // The right shift operator (>>) moves all bits to the right by the specified number of positions.
+    // This effectively divides the number by 2 for each shift position.
+    // Syntax: value >> n → shift right by n bits
+    // Example: 5 >> 1 → 2 (binary: 0101 >> 1 = 0010)
 
     // rust formatting
     let num = 42;
