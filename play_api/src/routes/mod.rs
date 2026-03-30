@@ -1,7 +1,7 @@
 use axum::{Router, routing::get};
-use crate::handlers::hello;
+use crate::handlers::health_check;
 
 pub fn create_routes() -> Router {
     Router::new()
-        .route("/", get(hello::hello_world))
+        .route("/health", get(health_check::is_ok))
 }
