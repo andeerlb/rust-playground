@@ -21,6 +21,7 @@ fn main() {
     // we can also change the type of a variable by reassigning it to a value of a different type
     // it is called "shadowing" in Rust
     // we can shadow a variable by declaring a new variable with the same name
+    #[allow(unused_variables)]
     let grams_of_protein = "100.345";
     let grams_of_protein = 100.345;
     println!("We have {} grams of protein.", grams_of_protein);
@@ -29,5 +30,15 @@ fn main() {
     let income = 50000.0;
     println!("The tax rate is {}.", TAX_RATE);
     println!("The income is {}.", income);
+
+    // type aliasing
+    type Kilometers = i32;
+    let distance: Kilometers = 100;
+    println!("The distance is {} kilometers.", distance);
+
+    // compiler directives
+    // we can use the `#[allow(dead_code)]` attribute to suppress warnings about unused code
+    #[allow(unused_variables)]
+    let unused_variable = 42;
 }
 
