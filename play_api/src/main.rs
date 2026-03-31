@@ -1,8 +1,9 @@
 mod config;
 mod handlers;
 mod routes;
+mod middleware;
 
-use routes::create_routes;
+use routes::{create_routes};
 
 #[tokio::main]
 async fn main() {
@@ -19,4 +20,4 @@ async fn main() {
     let app = create_routes();
 
     axum::serve(listener, app).await.unwrap();
-}
+} 

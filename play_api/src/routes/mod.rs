@@ -1,7 +1,15 @@
-use axum::{Router, routing::get};
-use crate::handlers::health_check;
+use axum::{Router, middleware};
+use crate::middleware::auth::auth_middleware;
+
+pub mod private;
+pub mod public;
 
 pub fn create_routes() -> Router {
     Router::new()
-        .route("/health", get(health_check::is_ok))
+        .nest("/api", public::routes())
+        .nest(
+            "/api",
+            private::routes()
+                .layer(middleware::from_fn(auth_middleware)),
+        )
 }
