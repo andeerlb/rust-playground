@@ -40,5 +40,40 @@ fn main() {
     // we can use the `#[allow(dead_code)]` attribute to suppress warnings about unused code
     #[allow(unused_variables)]
     let unused_variable = 42;
+
+    let mut seasons: [&str; 4] = ["Spring", "Summer", "Autumn", "Winter"];
+    println!("The seasons are: {:?}", seasons);
+
+    let first: &str = seasons[0];
+    println!("The first season is {}.", first);
+
+    let second: &str = seasons[1];
+    println!("The second season is {}.", second);
+
+    seasons[0] = "Rainy";
+    seasons[1] = "Dry";
+
+    println!("The seasons are: {:?}", seasons);
+    println!("The first season is {}.", first);
+    println!("The second season is {}.", second);
+
+    println!("\n--- Example: snapshot vs current read in array ---");
+    let mut labels = [String::from("A"), String::from("B")];
+
+    // Snapshot of the value currently inside position 0.
+    let snapshot = labels[0].clone();
+    labels[0] = String::from("Z");
+
+    println!("snapshot (captured before change): {}", snapshot);
+    println!("current labels[0] (read after change): {}", labels[0]);
+
+    // True reference to the element only lives while we do not mutate the array.
+    {
+        let live_ref = &labels[1];
+        println!("live_ref before mutation: {}", live_ref);
+    }
+
+    labels[1] = String::from("Y");
+    println!("labels[1] after mutation: {}", labels[1]);
 }
 
